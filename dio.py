@@ -88,8 +88,8 @@ def main():
     bass_audio, soprano_audio = extract_f0_and_separate(input_file)
     
     # 保存结果
-    save_audio(bass_audio, './bass_output.wav')
-    save_audio(soprano_audio, './soprano_output.wav')
+    save_audio(bass_audio, 'C:/Users/mrm/Desktop/test/DT2470/ChoirSeparation-Transcription/bass_output.wav')
+    save_audio(soprano_audio, 'C:/Users/mrm/Desktop/test/DT2470/ChoirSeparation-Transcription/soprano_output.wav')
     print("男低音和女高音音频分离完成！")
 
 if __name__ == '__main__':

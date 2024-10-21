@@ -82,7 +82,7 @@ def save_audio(audio, filename, fs=44100):
 # 主函数
 def main():
     # 输入音频文件路径
-    input_file = 'C:/Users/mrm/Desktop/test/DT2470/WGANSing-mtg/combined-DYN.wav'
+    input_file = 'C:/Users/mrm/Desktop/test/DT2470/ChoirSeparation-Transcription/combined-DYN.wav'
     
     # 分离男低音和女高音
     bass_audio, soprano_audio = extract_f0_and_separate(input_file)

@@ -5,8 +5,12 @@ import mir_eval
 original_bass, sr = librosa.load('DagstuhlChoirSet_V1.2.3/audio_wav_22050_mono/DCS_LI_FullChoir_Take01_B2_DYN.wav', sr=44100)
 original_soprano, sr = librosa.load('DagstuhlChoirSet_V1.2.3/audio_wav_22050_mono/DCS_LI_FullChoir_Take01_S1_DYN.wav', sr=44100)
 
-estimated_bass, sr = librosa.load('SINMF/b.wav', sr=44100)
-estimated_soprano, sr = librosa.load('SINMF/s.wav', sr=44100)
+#estimated_bass, sr = librosa.load('SINMF/b.wav', sr=44100)
+#estimated_soprano, sr = librosa.load('SINMF/s.wav', sr=44100)
+
+estimated_bass, sr = librosa.load('SINMF/B_psi.wav', sr=44100)
+estimated_soprano, sr = librosa.load('SINMF/S_psi.wav', sr=44100)
+
 
 min_len = min(len(original_bass), len(estimated_bass))
 original_bass = original_bass[:min_len]

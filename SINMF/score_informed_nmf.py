@@ -196,6 +196,13 @@ def resynthesize_sources(W, H, pitches, signal):
 
     H1 = numpy.copy(H)
     H2 = numpy.copy(H)
+
+    #mask1 = components > lh_max_pitch
+    #mask2 = components <= lh_max_pitch
+
+    #H1[mask1, :] *= 0.2  # 柔和地调整，而不是直接置零
+    #H2[mask2, :] *= 0.2
+
     H1[components > lh_max_pitch, :] = 0
     H2[components <= lh_max_pitch, :] = 0
     Y1 = numpy.dot(W, H1) * signal.X_phase
@@ -210,6 +217,32 @@ def resynthesize_sources(W, H, pitches, signal):
     ipd.display(ipd.Audio(reconstructed_signal2, rate=signal.sr))
     return reconstructed_signal1, reconstructed_signal2
 
+def resynthesize_sources_for_psi(W, H, signal):
+    lh_max_pitch = librosa.note_to_midi('C4')
+    #components = numpy.array(pitches)
+
+    H1 = numpy.copy(H)
+    H2 = numpy.copy(H)
+
+    #mask1 = components > lh_max_pitch
+    #mask2 = components <= lh_max_pitch
+
+    #H1[mask1, :] *= 0.2  # 柔和地调整，而不是直接置零
+    #H2[mask2, :] *= 0.2
+
+    H1[1, :] = 0
+    H2[0, :] = 0
+    Y1 = numpy.dot(W, H1) * signal.X_phase
+    Y2 = numpy.dot(W, H2) * signal.X_phase
+
+    print('Left hand:')
+    reconstructed_signal1 = librosa.istft(Y1, length=len(signal.x))
+    ipd.display(ipd.Audio(reconstructed_signal1, rate=signal.sr))
+
+    print('Right hand:')
+    reconstructed_signal2 = librosa.istft(Y2, length=len(signal.x))
+    ipd.display(ipd.Audio(reconstructed_signal2, rate=signal.sr))
+    return reconstructed_signal1, reconstructed_signal2
 
 def initialize_components(signal, pitches, num_partials=15, phi=0.5):
     n_features, _n_samples = signal.S.shape
